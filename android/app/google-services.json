@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "162555933545",
+    "project_id": "n2mobil",
+    "storage_bucket": "n2mobil.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162555933545:android:a3f5552137cc7a08cdc3f8",
+        "android_client_info": {
+          "package_name": "com.assignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162555933545-8o0if0ubqsm8k2uktekfjvq10clu8ah0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgDun9PKWs_odn2rjVLYO5xhtcWXAIukI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162555933545-8o0if0ubqsm8k2uktekfjvq10clu8ah0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
