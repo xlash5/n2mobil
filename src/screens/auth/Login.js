@@ -2,22 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { black } from 'react-native-paper/lib/typescript/styles/colors';
-import { TextInput, Button, Caption } from 'react-native-paper';
+import { TextInput, Button, Caption, Snackbar } from 'react-native-paper';
 
 const Login = ({ navigation }) => {
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
     const [err, setErr] = useState(false);
 
+    const onDismissSnackBar = () => setErr(false);
+
     const buttonLogIn = () => {
         try {
-            if (!mail || !password) {
+            if (!mail && !password) {
                 setErr(true);
                 return;
             }
             auth().signInWithEmailAndPassword(mail, password)
                 .then(() => {
                     console.log('Login successful');
+                }).catch(() => {
+                    setErr(true);
                 });
         } catch (e) {
             console.log('Login failed');
@@ -57,7 +61,15 @@ const Login = ({ navigation }) => {
                     Sign Up
                 </Button>
             </View>
-            {err ? <Caption style={{ alignSelf: 'center', color: 'red' }}>Login Failed</Caption> : null}
+            <Snackbar
+                visible={err}
+                onDismiss={onDismissSnackBar}
+                action={{
+                    label: 'Close',
+                    onPress: onDismissSnackBar,
+                }}>
+                Something went wrong.
+            </Snackbar>
         </View>
     )
 }

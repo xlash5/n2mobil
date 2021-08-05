@@ -1,48 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import { Button, Caption } from 'react-native-paper';
+import { Button, Caption, Title } from 'react-native-paper';
 
 const Home = ({ navigation }) => {
     const [userName, setUserName] = useState('');
+
+    const getCurrentDay = () => {
+        let d = new Date();
+        let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        return weekday[d.getDay()];
+    }
 
     return (
         <View style={styles.container}>
             <ScrollView>
                 <View style={{ height: 40.0 }}></View>
-                <Button
-                    mode="contained"
-                    onPress={() => {
-                        navigation.navigate('Map')
-                    }}
-                    style={styles.button}
-                >
-                    Map Screen
-                </Button>
-                <View style={{ height: 20.0 }}></View>
-                <Button
-                    mode="contained"
-                    onPress={() => navigation.navigate('ListOfPlaces')}
-                    style={styles.button}
-                >
-                    List of places
-                </Button>
-                <View style={{ height: 20.0 }}></View>
-                <Button
-                    mode="contained"
-                    onPress={() => navigation.navigate('ChangePassword')}
-                    style={styles.button}
-                >
-                    Change Password
-                </Button>
-                <View style={{ height: 20.0 }}></View>
-                <Button
-                    mode="contained"
-                    onPress={() => navigation.navigate('Profile')}
-                    style={styles.button}
-                >
-                    Profile
-                </Button>
+                <Title style={styles.text}>
+                    Welcome! Have a great {getCurrentDay()}! It is time to explore new places. 😎
+                </Title>
             </ScrollView>
         </View>
     )
@@ -55,5 +32,9 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
-    }
+    },
+    text: {
+        marginHorizontal: 50.0,
+        textAlign: 'center',
+    },
 })

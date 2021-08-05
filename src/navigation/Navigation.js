@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { TextInput, Button, Caption } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import auth from '@react-native-firebase/auth';
 import Home from '../screens/Home';
 import Login from '../screens/auth/Login';
@@ -18,10 +19,12 @@ const AuthStack = createNativeStackNavigator();
 
 function AuthStackScreen() {
     return (
-        <AuthStack.Navigator>
-            <AuthStack.Screen name="Login" component={Login} />
-            <AuthStack.Screen name="SignUp" component={SignUp} />
-        </AuthStack.Navigator>
+        <NavigationContainer>
+            <AuthStack.Navigator>
+                <AuthStack.Screen name="Login" component={Login} />
+                <AuthStack.Screen name="SignUp" component={SignUp} />
+            </AuthStack.Navigator>
+        </NavigationContainer>
     );
 }
 
@@ -40,37 +43,37 @@ const defaultAppbarOptions = {
         <Button
             mode="contained"
             onPress={buttonLogOut}
+            style={{ marginRight: 10.0 }}
         >
             LOG OUT
         </Button>
     ),
 };
 
+const Drawer = createDrawerNavigator();
+
 function HomeStackScreen() {
 
     return (
-        <HomeStack.Navigator>
-            <HomeStack.Screen
-                name="Home"
-                component={Home}
-                options={defaultAppbarOptions} />
-            <HomeStack.Screen
-                name="Map"
-                component={MapScreen}
-                options={defaultAppbarOptions} />
-            <HomeStack.Screen
-                name="ListOfPlaces"
-                component={ListOfPlaces}
-                options={defaultAppbarOptions} />
-            <HomeStack.Screen
-                name="ChangePassword"
-                component={ChangePassword}
-                options={defaultAppbarOptions} />
-            <HomeStack.Screen
-                name="Profile"
-                component={Profile}
-                options={defaultAppbarOptions} />
-        </HomeStack.Navigator>
+        <NavigationContainer>
+            <Drawer.Navigator initialRouteName="Home">
+                <Drawer.Screen name="Home"
+                    component={Home}
+                    options={defaultAppbarOptions} />
+                <Drawer.Screen name="Map"
+                    component={MapScreen}
+                    options={defaultAppbarOptions} />
+                <Drawer.Screen name="List Of Places"
+                    component={ListOfPlaces}
+                    options={defaultAppbarOptions} />
+                <Drawer.Screen name="Change Password"
+                    component={ChangePassword}
+                    options={defaultAppbarOptions} />
+                <Drawer.Screen name="Profile"
+                    component={Profile}
+                    options={defaultAppbarOptions} />
+            </Drawer.Navigator>
+        </NavigationContainer>
     );
 }
 
@@ -89,15 +92,11 @@ export default function Navigation() {
 
     if (!loggedIn) {
         return (
-            <NavigationContainer>
-                <AuthStackScreen />
-            </NavigationContainer>
+            <AuthStackScreen />
         );
     }
 
     return (
-        <NavigationContainer  >
-            <HomeStackScreen />
-        </NavigationContainer >
+        <HomeStackScreen />
     );
 }
